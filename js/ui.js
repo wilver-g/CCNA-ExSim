@@ -155,7 +155,7 @@ const UI = {
         container.appendChild(dropCol);
     },
 
-   buildNavigator() {
+    buildNavigator() {
         if (typeof questions === "undefined" || !Array.isArray(questions) || questions.length === 0) {
             console.error("buildNavigator error: 'questions' array is empty or undefined.");
             return;
@@ -200,7 +200,6 @@ const UI = {
             btn.className = "nav-btn";
             btn.type = "button";
             
-            // Explicitly set text content and dimension styles
             btn.textContent = String(index + 1);
             btn.style.width = "38px";
             btn.style.height = "38px";
@@ -225,14 +224,12 @@ const UI = {
 
         const buttons = nav.querySelectorAll("button");
         buttons.forEach((btn, idx) => {
-            // Guarantee question number text stays intact
             btn.textContent = String(idx + 1);
 
             let bg = "#ffffff";
             let color = "#333333";
             let border = "1px solid #cccccc";
 
-            // 1. Answered State -> Green
             const ans = Exam.answers ? Exam.answers[idx] : undefined;
             const isAnswered = ans !== undefined && ans !== null && 
                                (typeof ans !== "object" || Object.keys(ans).length > 0);
@@ -243,14 +240,12 @@ const UI = {
                 border = "1px solid #1e7e34";
             }
 
-            // 2. Flagged State -> Orange (Overrides answered background)
             if (Exam.flags && Exam.flags.has(idx)) {
                 bg = "#fd7e14";
                 color = "#ffffff";
                 border = "1px solid #dc3545";
             }
 
-            // 3. Active / Current Question -> Blue outline/border highlight
             if (idx === Exam.currentIndex) {
                 border = "3px solid #0056b3";
                 if (!isAnswered && (!Exam.flags || !Exam.flags.has(idx))) {
@@ -336,6 +331,12 @@ const UI = {
             });
         }
 
+        // Generate the AI assessment card HTML
+        let aiAssessmentHTML = "";
+        if (typeof Analytics !== "undefined" && typeof Analytics.generateAIAssessment === "function") {
+            aiAssessmentHTML = Analytics.generateAIAssessment(results);
+        }
+
         let reviewHTML = "";
         questions.forEach((q, idx) => {
             const userAns = Exam.answers[idx];
@@ -386,7 +387,10 @@ const UI = {
                     ${domainsHTML}
                 </div>
 
-                <h3>Answer Review</h3>
+                <!-- AI Assessment Card Rendered Here -->
+                ${aiAssessmentHTML}
+
+                <h3 style="margin-top: 25px;">Answer Review</h3>
                 <hr style="margin: 10px 0 20px 0; border: 0; border-top: 1px solid #ddd;">
                 ${reviewHTML}
 
