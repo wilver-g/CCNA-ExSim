@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="250" viewBox="0 0 760 250" role="img" aria-labelledby="title desc">
+ <title id="title">NAT router topology</title><desc id="desc">A private LAN 192.168.10.0 slash 24 connects through R1 with inside address 192.168.10.1 and outside address 203.0.113.2 to the internet.</desc>
+ <style>text{font-family:Arial,sans-serif;fill:#17324d}.device{fill:#e8f4fb;stroke:#006b9b;stroke-width:3}.cloud{fill:#f5f8fa;stroke:#91a8b8;stroke-width:2}.line{stroke:#006b9b;stroke-width:4}.label{font-size:16px;font-weight:700}.small{font-size:14px}</style>
+ <rect width="760" height="250" rx="16" fill="#f8fbfd"/><rect x="40" y="90" width="145" height="70" rx="12" class="device"/><text x="68" y="120" class="label">Private LAN</text><text x="55" y="145" class="small">192.168.10.0/24</text>
+ <line x1="185" y1="125" x2="305" y2="125" class="line"/><rect x="305" y="80" width="145" height="90" rx="12" class="device"/><text x="360" y="112" class="label">R1</text><text x="318" y="137" class="small">inside: .10.1</text><text x="318" y="157" class="small">outside: 203.0.113.2</text>
+ <line x1="450" y1="125" x2="560" y2="125" class="line"/><ellipse cx="650" cy="125" rx="90" ry="55" class="cloud"/><text x="616" y="131" class="label">Internet</text>
+</svg>

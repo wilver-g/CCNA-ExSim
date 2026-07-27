@@ -1,6 +1,12 @@
 // ui.js
 
 const UI = {
+    escapeHTML(value) {
+        const element = document.createElement("div");
+        element.textContent = value == null ? "" : String(value);
+        return element.innerHTML;
+    },
+
     loadQuestion(index) {
         const q = questions[index];
         if (!q) return;
@@ -14,17 +20,39 @@ const UI = {
         
         const questionTextEl = document.getElementById("question");
         if (questionTextEl) {
-            questionTextEl.innerHTML = `${q.question}${typeHint}`;
+            questionTextEl.textContent = `${q.question}${typeHint}`;
         }
 
         const codeBlock = document.getElementById("codeBlock");
         if (codeBlock) {
             if (q.snippet) {
-                codeBlock.innerHTML = `<pre><code>${q.snippet}</code></pre>`;
+                codeBlock.innerHTML = `<pre><code>${this.escapeHTML(q.snippet)}</code></pre>`;
                 codeBlock.classList.remove("hidden");
             } else {
                 codeBlock.innerHTML = "";
                 codeBlock.classList.add("hidden");
+            }
+        }
+
+        const diagramContainer = document.getElementById("diagramContainer");
+        if (diagramContainer) {
+            if (q.diagram) {
+                diagramContainer.innerHTML = "";
+                const diagram = document.createElement("img");
+                diagram.src = q.diagram.src;
+                diagram.alt = q.diagram.alt || "Network topology diagram";
+                diagram.loading = "eager";
+                diagramContainer.appendChild(diagram);
+
+                if (q.diagram.caption) {
+                    const caption = document.createElement("figcaption");
+                    caption.textContent = q.diagram.caption;
+                    diagramContainer.appendChild(caption);
+                }
+                diagramContainer.classList.remove("hidden");
+            } else {
+                diagramContainer.innerHTML = "";
+                diagramContainer.classList.add("hidden");
             }
         }
 
@@ -57,7 +85,8 @@ const UI = {
                 const button = document.createElement("button");
                 button.className = "answer";
                 const letter = String.fromCharCode(65 + i);
-                button.innerHTML = `<strong>${letter}.</strong> ${option}`;
+                button.innerHTML = `<strong>${letter}.</strong> ${this.escapeHTML(option)}`;
+                button.setAttribute("aria-pressed", String(selectedList.includes(i)));
 
                 if (selectedList.includes(i)) button.classList.add("selected");
 
@@ -141,6 +170,11 @@ const UI = {
                     
                     if (!isNaN(dragIdx)) {
                         if (!Exam.answers[index]) Exam.answers[index] = {};
+                        Object.keys(Exam.answers[index]).forEach(existingZone => {
+                            if (Exam.answers[index][existingZone] === dragIdx) {
+                                delete Exam.answers[index][existingZone];
+                            }
+                        });
                         Exam.answers[index][zoneIdx] = dragIdx;
                         UI.loadQuestion(index);
                     }
@@ -161,7 +195,7 @@ const UI = {
             return;
         }
 
-        let nav = document.getElementById("questionNavigator") || document.getElementById("navigator");
+        let nav = document.getElementById("navButtons");
 
         if (!nav) {
             const allElements = Array.from(document.querySelectorAll("div, p, h1, h2, h3, h4, span"));
@@ -189,28 +223,13 @@ const UI = {
         if (!nav) return;
 
         nav.innerHTML = "";
-        nav.style.display = "flex";
-        nav.style.flexWrap = "wrap";
-        nav.style.gap = "8px";
-        nav.style.marginTop = "12px";
-        nav.style.padding = "10px 0";
-
         questions.forEach((_, index) => {
             const btn = document.createElement("button");
-            btn.className = "nav-btn";
+            btn.className = "navBtn";
             btn.type = "button";
             
             btn.textContent = String(index + 1);
-            btn.style.width = "38px";
-            btn.style.height = "38px";
-            btn.style.borderRadius = "4px";
-            btn.style.cursor = "pointer";
-            btn.style.fontWeight = "bold";
-            btn.style.fontSize = "0.85rem";
-            btn.style.display = "flex";
-            btn.style.alignItems = "center";
-            btn.style.justifyContent = "center";
-            
+            btn.setAttribute("aria-label", `Go to question ${index + 1}`);
             btn.onclick = () => Exam.goToQuestion(index);
             nav.appendChild(btn);
         });
@@ -219,44 +238,22 @@ const UI = {
     },
 
     updateNavigator() {
-        const nav = document.getElementById("questionNavigator") || document.getElementById("navigator");
+        const nav = document.getElementById("navButtons") || document.getElementById("questionNavigator");
         if (!nav) return;
 
         const buttons = nav.querySelectorAll("button");
         buttons.forEach((btn, idx) => {
             btn.textContent = String(idx + 1);
 
-            let bg = "#ffffff";
-            let color = "#333333";
-            let border = "1px solid #cccccc";
-
             const ans = Exam.answers ? Exam.answers[idx] : undefined;
             const isAnswered = ans !== undefined && ans !== null && 
                                (typeof ans !== "object" || Object.keys(ans).length > 0);
 
-            if (isAnswered) {
-                bg = "#28a745";
-                color = "#ffffff";
-                border = "1px solid #1e7e34";
-            }
-
-            if (Exam.flags && Exam.flags.has(idx)) {
-                bg = "#fd7e14";
-                color = "#ffffff";
-                border = "1px solid #dc3545";
-            }
-
-            if (idx === Exam.currentIndex) {
-                border = "3px solid #0056b3";
-                if (!isAnswered && (!Exam.flags || !Exam.flags.has(idx))) {
-                    bg = "#e8f0fe";
-                    color = "#0056b3";
-                }
-            }
-
-            btn.style.backgroundColor = bg;
-            btn.style.color = color;
-            btn.style.border = border;
+            btn.className = "navBtn";
+            if (isAnswered) btn.classList.add("answered");
+            if (Exam.flags && Exam.flags.has(idx)) btn.classList.add("review");
+            if (idx === Exam.currentIndex) btn.classList.add("current");
+            btn.setAttribute("aria-current", idx === Exam.currentIndex ? "true" : "false");
         });
     },
 
@@ -290,10 +287,10 @@ const UI = {
         if (!flagBtn) return;
 
         if (Exam.flags && Exam.flags.has(Exam.currentIndex)) {
-            flagBtn.classList.add("flagged");
+            flagBtn.classList.add("active");
             flagBtn.innerText = "Unflag Question";
         } else {
-            flagBtn.classList.remove("flagged");
+            flagBtn.classList.remove("active");
             flagBtn.innerText = "Flag for Review";
         }
     },
@@ -313,7 +310,11 @@ const UI = {
     },
 
     showResults(results) {
-        const container = document.getElementById("app") || document.body;
+        const quizContainer = document.getElementById("quizContainer");
+        const container = document.getElementById("resultScreen");
+        if (!container) return;
+        if (quizContainer) quizContainer.classList.add("hidden");
+        container.classList.remove("hidden");
 
         const isPassed = results.passed;
         const statusText = isPassed ? "PASS" : "FAIL";
@@ -324,7 +325,7 @@ const UI = {
                 const d = results.domains[domain];
                 domainsHTML += `
                     <div class="domain-score-row" style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                        <span>${domain}</span>
+                        <span>${this.escapeHTML(domain)}</span>
                         <strong>${d.percentage}% (${d.correct}/${d.total})</strong>
                     </div>
                 `;
@@ -366,10 +367,10 @@ const UI = {
 
             reviewHTML += `
                 <div class="review-card" style="border-left: 5px solid ${borderCardColor}; padding: 15px; margin-bottom: 15px; background: #fff; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    <p style="font-weight:bold; margin-bottom: 8px;">Q${idx + 1}: ${q.question}</p>
+                    <p style="font-weight:bold; margin-bottom: 8px;">Q${idx + 1}: ${this.escapeHTML(q.question)}</p>
                     <p style="margin: 4px 0; color: ${isCorrect ? '#28a745' : '#dc3545'};"><strong>Your Answer:</strong> ${userAnsDisplay}</p>
                     ${!isCorrect && q.options ? `<p style="margin: 4px 0; color: #28a745;"><strong>Correct Answer:</strong> ${Analytics.normalizeAnswer(rawCorrect).map(i => `${String.fromCharCode(65 + i)}. ${q.options[i]}`).join(", ")}</p>` : ''}
-                    ${q.explanation ? `<div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 4px; font-size: 0.9rem;"><strong>Explanation:</strong> ${q.explanation}</div>` : ''}
+                    ${q.explanation ? `<div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 4px; font-size: 0.9rem;"><strong>Explanation:</strong> ${this.escapeHTML(q.explanation)}</div>` : ''}
                 </div>
             `;
         });

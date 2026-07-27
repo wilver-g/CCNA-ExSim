@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="250" viewBox="0 0 760 250" role="img" aria-labelledby="title desc">
+ <title id="title">Extended ACL placement topology</title><desc id="desc">Users in 10.20.30.0 slash 24 connect through R1 to a server network 172.16.50.0 slash 24. An extended ACL controls traffic from users to the servers.</desc>
+ <style>text{font-family:Arial,sans-serif;fill:#17324d}.device{fill:#e8f4fb;stroke:#006b9b;stroke-width:3}.server{fill:#f5f8fa;stroke:#91a8b8;stroke-width:2}.line{stroke:#006b9b;stroke-width:4}.acl{fill:#fff4df;stroke:#ef8c00;stroke-width:3}.label{font-size:16px;font-weight:700}.small{font-size:14px}</style>
+ <rect width="760" height="250" rx="16" fill="#f8fbfd"/><rect x="35" y="85" width="160" height="80" rx="12" class="device"/><text x="68" y="118" class="label">Users</text><text x="52" y="145" class="small">10.20.30.0/24</text><line x1="195" y1="125" x2="300" y2="125" class="line"/>
+ <rect x="248" y="65" width="55" height="35" rx="8" class="acl"/><text x="257" y="88" class="small">ACL</text><rect x="300" y="85" width="120" height="80" rx="12" class="device"/><text x="344" y="132" class="label">R1</text><line x1="420" y1="125" x2="545" y2="125" class="line"/>
+ <rect x="545" y="85" width="175" height="80" rx="12" class="server"/><text x="585" y="118" class="label">Servers</text><text x="560" y="145" class="small">172.16.50.0/24</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="270" viewBox="0 0 760 270" role="img" aria-labelledby="title desc">
+ <title id="title">Switch VLAN trunk topology</title><desc id="desc">A trunk connects SW1 to SW2. PC-A is in VLAN 10 and PC-B is in VLAN 20 on both switches.</desc>
+ <style>text{font-family:Arial,sans-serif;fill:#17324d}.sw{fill:#e8f4fb;stroke:#006b9b;stroke-width:3}.pc{fill:#f5f8fa;stroke:#91a8b8;stroke-width:2}.line{stroke:#006b9b;stroke-width:4}.trunk{stroke:#ef8c00;stroke-width:6}.label{font-size:16px;font-weight:700}.small{font-size:13px}</style>
+ <rect width="760" height="270" rx="16" fill="#f8fbfd"/><rect x="250" y="95" width="120" height="75" rx="12" class="sw"/><text x="286" y="138" class="label">SW1</text><rect x="505" y="95" width="120" height="75" rx="12" class="sw"/><text x="541" y="138" class="label">SW2</text>
+ <line x1="370" y1="132" x2="505" y2="132" class="trunk"/><text x="400" y="115" class="small">802.1Q trunk</text>
+ <rect x="40" y="35" width="125" height="52" rx="10" class="pc"/><text x="75" y="66" class="label">PC-A</text><text x="53" y="107" class="small">VLAN 10</text><line x1="165" y1="61" x2="250" y2="110" class="line"/>
+ <rect x="40" y="183" width="125" height="52" rx="10" class="pc"/><text x="75" y="214" class="label">PC-B</text><text x="53" y="255" class="small">VLAN 20</text><line x1="165" y1="209" x2="250" y2="155" class="line"/>
+ <rect x="650" y="35" width="75" height="52" rx="10" class="pc"/><text x="661" y="66" class="label">PC-C</text><text x="646" y="107" class="small">VLAN 10</text><line x1="625" y1="110" x2="650" y2="61" class="line"/>
+ <rect x="650" y="183" width="75" height="52" rx="10" class="pc"/><text x="661" y="214" class="label">PC-D</text><text x="646" y="255" class="small">VLAN 20</text><line x1="625" y1="155" x2="650" y2="209" class="line"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="260" viewBox="0 0 760 260" role="img" aria-labelledby="title desc">
+ <title id="title">OSPF areas topology</title><desc id="desc">R1 is in Area 1, R2 is an area border router between Area 1 and Area 0, and R3 is in Area 0.</desc>
+ <style>text{font-family:Arial,sans-serif;fill:#17324d}.area0{fill:#e8f4fb;stroke:#006b9b;stroke-width:2}.area1{fill:#fff4df;stroke:#ef8c00;stroke-width:2}.router{fill:#fff;stroke:#17324d;stroke-width:3}.line{stroke:#006b9b;stroke-width:4}.label{font-size:16px;font-weight:700}.small{font-size:14px}</style>
+ <rect width="760" height="260" rx="16" fill="#f8fbfd"/><rect x="35" y="35" width="325" height="190" rx="16" class="area1"/><text x="55" y="65" class="label">Area 1</text><rect x="400" y="35" width="325" height="190" rx="16" class="area0"/><text x="420" y="65" class="label">Area 0 (backbone)</text>
+ <line x1="190" y1="135" x2="370" y2="135" class="line"/><line x1="390" y1="135" x2="570" y2="135" class="line"/><circle cx="150" cy="135" r="38" class="router"/><text x="135" y="141" class="label">R1</text><circle cx="380" cy="135" r="38" class="router"/><text x="365" y="141" class="label">R2</text><circle cx="610" cy="135" r="38" class="router"/><text x="595" y="141" class="label">R3</text><text x="330" y="195" class="small">ABR</text>
+</svg>

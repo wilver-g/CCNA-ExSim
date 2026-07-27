@@ -13,9 +13,29 @@
         <header>
             <h1>CCNA 200-301 Practice Exam</h1>
 
+            <section class="utility-bar" aria-label="Exam tools and accessibility settings">
+                <div class="accessibility-tools">
+                    <button id="themeToggle" type="button" aria-pressed="false">Dark mode</button>
+                    <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+                    <label for="fontScale">Text size
+                        <select id="fontScale">
+                            <option value="normal">Normal</option>
+                            <option value="large">Large</option>
+                            <option value="xlarge">Extra large</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="question-bank-tools">
+                    <button id="exportBankBtn" type="button">Export question bank</button>
+                    <label class="import-label" for="importBankInput">Import JSON question bank</label>
+                    <input id="importBankInput" type="file" accept="application/json,.json" class="visually-hidden">
+                </div>
+                <p id="questionBankStatus" class="utility-status" role="status"></p>
+            </section>
+
             <div class="topbar">
-                <div id="timer">
-                    Time Remaining
+                <div id="timer" aria-live="polite">
+                    <span class="timer-label">Time Remaining</span>
                     <span id="time">120:00</span>
                 </div>
 
@@ -36,6 +56,9 @@
                 
                 <!-- Terminal / CLI Snippets -->
                 <div id="codeBlock"></div>
+
+                <!-- Network Topology Diagrams -->
+                <figure id="diagramContainer" class="diagram hidden"></figure>
 
                 <!-- Answer Options -->
                 <div id="answers"></div>
@@ -81,7 +104,6 @@
 
     <!-- Application Modules -->
     <script src="js/questions.js"></script>
-    <script src="js/timer.js"></script>
     <script src="js/exam.js"></script>
     <script src="js/analytics.js"></script>
     <script src="js/ui.js"></script>

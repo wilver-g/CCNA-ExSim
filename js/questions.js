@@ -4,7 +4,8 @@
    Question Bank & Domain Metadata
 ====================================== */
 
-const questions = [
+// The complete 102-question source bank. app.js selects a fresh 60-question exam at startup.
+let questions = [
   // --- Domain 1: Network Fundamentals ---
   {
     id: 101,
@@ -1218,6 +1219,344 @@ const dragDropQuestions = [
         ],
         correct: 1,
         explanation: "OpenFlow is a foundational SDN communication protocol that allows an external controller to direct the forwarding plane of network switches directly."
-    }
+    },
+  {
+    domain: "Network Fundamentals",
+    type: "dragdrop",
+    question: "Match each OSI layer with its protocol data unit (PDU).",
+    draggables: ["Bits", "Frames", "Packets", "Segments"],
+    dropzones: ["Physical Layer", "Data Link Layer", "Network Layer", "Transport Layer"],
+    correct: [0, 1, 2, 3],
+    explanation: "The Physical layer transmits bits, the Data Link layer uses frames, the Network layer uses packets, and the Transport layer uses segments."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "dragdrop",
+    question: "Match each IPv6 address type with its common prefix.",
+    draggables: ["fe80::/10", "fc00::/7", "2000::/3", "ff00::/8"],
+    dropzones: ["Link-local", "Unique local", "Global unicast", "Multicast"],
+    correct: [0, 1, 2, 3],
+    explanation: "Link-local addresses use fe80::/10, unique local addresses use fc00::/7, global unicast addresses use 2000::/3, and multicast addresses use ff00::/8."
+  },
+  {
+    domain: "Network Access",
+    type: "dragdrop",
+    question: "Match each switchport mode with its forwarding behavior.",
+    draggables: ["Carries traffic for one VLAN", "Carries multiple VLANs with 802.1Q tags", "Negotiates trunking dynamically", "Forces the interface to be non-trunking"],
+    dropzones: ["Access mode", "Trunk mode", "Dynamic desirable mode", "Dynamic auto mode"],
+    correct: [0, 1, 2, 3],
+    explanation: "Access ports carry one VLAN, trunk ports carry tagged VLAN traffic, dynamic desirable actively negotiates a trunk, and dynamic auto waits for the other side to initiate negotiation."
+  },
+  {
+    domain: "Network Access",
+    type: "dragdrop",
+    question: "Match each Spanning Tree Protocol port role with its purpose.",
+    draggables: ["The best path toward the root bridge", "The forwarding port for a LAN segment", "A backup path that does not forward", "The elected bridge for the Layer 2 topology"],
+    dropzones: ["Root port", "Designated port", "Alternate port", "Root bridge"],
+    correct: [0, 1, 2, 3],
+    explanation: "A root port is a switch's best path to the root bridge. A designated port forwards on a segment. An alternate port is a blocked backup path. The root bridge is the STP reference bridge."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "dragdrop",
+    question: "Match each routing protocol with its administrative distance by default.",
+    draggables: ["110", "120", "90", "115"],
+    dropzones: ["OSPF", "RIP", "EIGRP internal", "IS-IS"],
+    correct: [0, 1, 2, 3],
+    explanation: "The default administrative distances are OSPF 110, RIP 120, EIGRP internal 90, and IS-IS 115."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "dragdrop",
+    question: "Match each route type with the information it represents in a routing table.",
+    draggables: ["Network directly attached to a router interface", "Manually configured next hop or exit interface", "Route learned through OSPF", "Route used when no more-specific match exists"],
+    dropzones: ["Connected route", "Static route", "OSPF route", "Default route"],
+    correct: [0, 1, 2, 3],
+    explanation: "Connected routes come from active interfaces, static routes are manually configured, OSPF routes are dynamically learned, and a default route is used only when no longer prefix match exists."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "dragdrop",
+    question: "Match each first-hop redundancy protocol with its description.",
+    draggables: ["Cisco proprietary protocol using an active and standby router", "Open standard protocol using a master and backup router", "Cisco proprietary protocol that load balances across multiple active gateways"],
+    dropzones: ["HSRP", "VRRP", "GLBP"],
+    correct: [0, 1, 2],
+    explanation: "HSRP is Cisco proprietary and elects active/standby gateways. VRRP is an open standard with master/backup roles. GLBP is Cisco proprietary and supports gateway load balancing."
+  },
+  {
+    domain: "IP Services",
+    type: "dragdrop",
+    question: "Match each common network service with its default transport protocol and port.",
+    draggables: ["UDP 67/68", "UDP 53", "TCP 22", "UDP 123"],
+    dropzones: ["DHCP", "DNS", "SSH", "NTP"],
+    correct: [0, 1, 2, 3],
+    explanation: "DHCP uses UDP 67 and 68, DNS commonly uses UDP 53, SSH uses TCP 22, and NTP uses UDP 123."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "dragdrop",
+    question: "Match each AAA function with its purpose.",
+    draggables: ["Verifies a user's identity", "Determines what an authenticated user may do", "Records user activity and session information"],
+    dropzones: ["Authentication", "Authorization", "Accounting"],
+    correct: [0, 1, 2],
+    explanation: "Authentication verifies identity, authorization assigns permitted actions, and accounting records what occurred during a session."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "dragdrop",
+    question: "Match each API method with its typical REST operation.",
+    draggables: ["Retrieve a resource", "Create a resource", "Replace or update a resource", "Remove a resource"],
+    dropzones: ["GET", "POST", "PUT", "DELETE"],
+    correct: [0, 1, 2, 3],
+    explanation: "GET retrieves resources, POST creates resources, PUT replaces or updates resources, and DELETE removes resources."
+  }
 ];
-questions.push(...dragDropQuestions)
+questions.push(...dragDropQuestions);
+
+const diagramQuestions = [
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Refer to the topology. Which next hop should R1 select for traffic destined to 10.10.10.25?",
+    diagram: { src: "assets/topology-longest-prefix.svg", alt: "R1 has a route through R2 to 10.10.0.0 slash 16 and through R3 to 10.10.10.0 slash 24.", caption: "Routing-table longest-prefix-match scenario" },
+    options: ["R2, because the /16 route has the lower metric", "R3, because 10.10.10.0/24 is the longest prefix match", "R2, because static routes always override OSPF routes", "Both R2 and R3, using equal-cost load balancing"],
+    correct: 1,
+    explanation: "Routing uses the most specific matching prefix first. The /24 route through R3 is more specific than the /16 route through R2."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "Refer to the topology. Which configuration is required on the link between SW1 and SW2 so PCs in the same VLAN can communicate across the switches?",
+    diagram: { src: "assets/topology-vlan-trunk.svg", alt: "SW1 and SW2 connect over an 802.1Q trunk. VLAN 10 and VLAN 20 exist on both switches.", caption: "VLAN trunking scenario" },
+    options: ["Configure both link interfaces as access ports in VLAN 10", "Configure an 802.1Q trunk and allow VLANs 10 and 20", "Configure routed ports with IP addresses on both switches", "Disable DTP and assign the link to VLAN 20 only"],
+    correct: 1,
+    explanation: "A trunk carries multiple VLANs between switches. VLANs 10 and 20 must be allowed across the trunk for end hosts in each VLAN to communicate."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "Refer to the topology. Which NAT role should be applied to R1's interface connected to the private LAN?",
+    diagram: { src: "assets/topology-nat.svg", alt: "Private LAN 192.168.10.0 slash 24 connects to R1, which has an inside interface 192.168.10.1 and outside interface 203.0.113.2 toward the internet.", caption: "NAT inside/outside interface scenario" },
+    options: ["ip nat outside", "ip nat inside", "ip helper-address", "ip nat pool"],
+    correct: 1,
+    explanation: "The interface facing the private, translated-address side of the network is configured with ip nat inside. The internet-facing interface is configured with ip nat outside."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Refer to the OSPF topology. What role does R2 perform?",
+    diagram: { src: "assets/topology-ospf.svg", alt: "R1 in OSPF Area 1 connects to R2, which connects into Area 0 to R3.", caption: "Multi-area OSPF scenario" },
+    options: ["Autonomous system boundary router", "Area border router", "Designated router", "Backup designated router"],
+    correct: 1,
+    explanation: "R2 has an interface in Area 1 and an interface in Area 0, so it is an area border router (ABR)."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "single",
+    question: "Refer to the topology. Where should an extended ACL that filters traffic from the user network to the server network be placed?",
+    diagram: { src: "assets/topology-acl.svg", alt: "Users in 10.20.30.0 slash 24 connect through R1 to servers in 172.16.50.0 slash 24.", caption: "Extended ACL placement scenario" },
+    options: ["Inbound on R1's interface closest to the users", "Outbound on R1's interface closest to the users", "Inbound on R1's interface closest to the servers", "On the server NICs only"],
+    correct: 0,
+    explanation: "Extended ACLs are generally placed as close to the source as possible to stop unwanted traffic before it crosses the network."
+  }
+];
+
+questions.push(...diagramQuestions);
+
+// Low-frequency details that are still useful to recognize on a CCNA exam.
+const memorizationQuestions = [
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "What is the minimum valid Ethernet frame size, excluding the preamble and start frame delimiter?",
+    options: ["46 bytes", "64 bytes", "128 bytes", "1518 bytes"],
+    correct: 1,
+    explanation: "A valid Ethernet frame is at least 64 bytes from destination MAC address through the frame check sequence. Frames with less payload are padded."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "Which IPv6 multicast address represents all nodes on the local link?",
+    options: ["FF02::1", "FF02::2", "FE80::1", "FF05::1:3"],
+    correct: 0,
+    explanation: "FF02::1 is the link-local all-nodes multicast address. FF02::2 is the all-routers multicast address."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "What is the default IEEE 802.1D STP bridge priority before the VLAN system ID extension is added?",
+    options: ["0", "4096", "32768", "65535"],
+    correct: 2,
+    explanation: "The default STP bridge priority is 32768. With the extended system ID, the VLAN ID is incorporated into the bridge ID."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "By default, which VLAN is assigned to an access port on a Cisco switch?",
+    options: ["VLAN 0", "VLAN 1", "VLAN 1002", "The native VLAN"],
+    correct: 1,
+    explanation: "Cisco switch access ports are assigned to VLAN 1 by default. VLAN 1 is also the default native VLAN on an 802.1Q trunk unless changed."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Which IPv4 multicast address do OSPF routers use to send Hello packets to all OSPF routers on a multiaccess network?",
+    options: ["224.0.0.5", "224.0.0.6", "224.0.0.9", "224.0.0.10"],
+    correct: 0,
+    explanation: "OSPF uses 224.0.0.5 for AllSPFRouters and 224.0.0.6 for AllDRouters."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Which IP protocol number identifies EIGRP packets?",
+    options: ["6", "17", "88", "89"],
+    correct: 2,
+    explanation: "EIGRP uses IP protocol number 88. TCP is 6, UDP is 17, and OSPF is 89."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "Which default UDP port is used by a device to send syslog messages to a syslog server?",
+    options: ["161", "162", "514", "520"],
+    correct: 2,
+    explanation: "Traditional syslog uses UDP port 514. SNMP uses UDP 161, and SNMP traps commonly use UDP 162."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "Which UDP port is the standard destination for SNMP trap or inform notifications?",
+    options: ["53", "161", "162", "514"],
+    correct: 2,
+    explanation: "SNMP managers listen on UDP 162 for traps and informs. SNMP polling normally uses UDP 161."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "single",
+    question: "Which transport protocol and port does TACACS+ use by default?",
+    options: ["UDP 49", "TCP 49", "UDP 1812", "TCP 1812"],
+    correct: 1,
+    explanation: "TACACS+ uses TCP port 49. RADIUS authentication conventionally uses UDP port 1812."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "single",
+    question: "Which UDP port is conventionally used for RADIUS authentication?",
+    options: ["49", "1812", "1813", "1645"],
+    correct: 1,
+    explanation: "RADIUS authentication uses UDP 1812 and RADIUS accounting uses UDP 1813."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "Which HTTP Content-Type header value identifies a JSON request or response body?",
+    options: ["text/json", "application/json", "application/xml", "text/plain"],
+    correct: 1,
+    explanation: "The standard media type for JSON is application/json."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "Which RESTCONF/REST-style HTTP method is typically used to apply a partial update to an existing resource?",
+    options: ["GET", "POST", "PATCH", "DELETE"],
+    correct: 2,
+    explanation: "PATCH applies a partial update. GET retrieves, POST creates or submits, and DELETE removes a resource."
+  }
+];
+
+questions.push(...memorizationQuestions);
+
+// Command-analysis questions: interpret realistic Cisco IOS show-command output.
+const commandAnalysisQuestions = [
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Refer to the routing table. Which route will R1 use for a packet destined to 192.168.10.70?",
+    snippet: "R1# show ip route\n\nS    192.168.10.0/24 [1/0] via 10.0.0.2\nO    192.168.10.64/26 [110/20] via 10.0.0.3\nO    192.168.0.0/16 [110/50] via 10.0.0.4",
+    options: ["The static 192.168.10.0/24 route via 10.0.0.2", "The OSPF 192.168.10.64/26 route via 10.0.0.3", "The OSPF 192.168.0.0/16 route via 10.0.0.4", "All three routes using load balancing"],
+    correct: 1,
+    explanation: "192.168.10.70 is within 192.168.10.64/26. Longest-prefix match takes precedence over administrative distance and metric."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "Refer to the output. Why can a host connected to Gi0/2 not communicate with other devices in VLAN 20?",
+    snippet: "SW1# show vlan brief\n\nVLAN Name                             Status    Ports\n---- -------------------------------- --------- -------------------------------\n1    default                          active    Gi0/1\n20   USERS                            active\n30   VOICE                            active    Gi0/3",
+    options: ["VLAN 20 is suspended", "Gi0/2 is not assigned to VLAN 20", "Gi0/2 must be configured as a routed port", "VLAN 20 must be configured as the native VLAN"],
+    correct: 1,
+    explanation: "VLAN 20 is active, but no access ports are listed in that VLAN. Gi0/2 needs to be assigned with switchport access vlan 20."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "Refer to the output. Which VLAN is prevented from crossing the trunk on Gi0/1?",
+    snippet: "SW1# show interfaces trunk\n\nPort        Mode         Encapsulation  Status        Native vlan\nGi0/1       on           802.1q         trunking      99\n\nPort        Vlans allowed on trunk\nGi0/1       10,20,30\n\nPort        Vlans allowed and active in management domain\nGi0/1       10,20,30",
+    options: ["VLAN 10", "VLAN 20", "VLAN 30", "VLAN 99"],
+    correct: 3,
+    explanation: "VLAN 99 is the native VLAN, but it is not included in the allowed VLAN list. VLANs 10, 20, and 30 are allowed on the trunk."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Refer to the output. What is the operational state of GigabitEthernet0/1?",
+    snippet: "R1# show ip interface brief\n\nInterface              IP-Address      OK? Method Status                Protocol\nGigabitEthernet0/0     10.1.1.1        YES manual up                    up\nGigabitEthernet0/1     unassigned      YES unset  administratively down down\nGigabitEthernet0/2     10.2.2.1        YES manual up                    down",
+    options: ["Up/up", "Administratively down/down", "Up/down", "Down/down because of a physical failure"],
+    correct: 1,
+    explanation: "Administratively down means the interface has been shut down with the shutdown command. It requires no shutdown to enable it."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "Refer to the output. What device is directly connected to SW1 on Gi0/1?",
+    snippet: "SW1# show cdp neighbors\n\nDevice ID        Local Intrfce     Holdtme    Capability  Platform  Port ID\nR1               Gig 0/1           153       R S I       ISR4331   Gig 0/0\nSW2              Gig 0/2           146       S I         C9300     Gig 1/0/1",
+    options: ["An ISR4331 router named R1", "A C9300 switch named SW2", "An ISR4331 router named SW2", "A C9300 switch named R1"],
+    correct: 0,
+    explanation: "The Gi0/1 row identifies neighbor R1, with platform ISR4331 and router capabilities."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Refer to the output. What does the OSPF neighbor state indicate?",
+    snippet: "R1# show ip ospf neighbor\n\nNeighbor ID     Pri   State           Dead Time   Address         Interface\n2.2.2.2           1   FULL/DR        00:00:33    10.0.12.2       GigabitEthernet0/0",
+    options: ["The adjacency is fully established and the neighbor is the DR", "The adjacency is not established because the neighbor is in Init", "R1 is the DR and the neighbor is the BDR", "The neighbor is unreachable"],
+    correct: 0,
+    explanation: "FULL means the OSPF adjacency is established. FULL/DR indicates that the listed neighbor is the designated router on the segment."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "Refer to the output. Which private host is currently being translated to the inside global address 203.0.113.10?",
+    snippet: "R1# show ip nat translations\n\nPro  Inside global         Inside local          Outside local         Outside global\nicmp 203.0.113.10:3      192.168.1.10:3       8.8.8.8:3             8.8.8.8:3\ntcp  203.0.113.10:49152  192.168.1.25:49152   198.51.100.20:443     198.51.100.20:443",
+    options: ["192.168.1.10 only", "192.168.1.25 only", "Both 192.168.1.10 and 192.168.1.25", "Neither host; 203.0.113.10 is an outside local address"],
+    correct: 2,
+    explanation: "Both entries use 203.0.113.10 as the inside global address, demonstrating PAT with different protocol/port identifiers."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "single",
+    question: "Refer to the output. Why is the second device attempting to connect on Fa0/10 unable to access the network?",
+    snippet: "SW1# show port-security interface fa0/10\n\nPort Security              : Enabled\nPort Status                : Secure-shutdown\nViolation Mode             : Shutdown\nMaximum MAC Addresses      : 1\nTotal MAC Addresses        : 1\nSecurity Violation Count   : 1",
+    options: ["The port is in err-disabled state after exceeding its secure MAC limit", "The port has been configured as a trunk", "The port is waiting for a DHCP lease", "The port is disabled because STP selected an alternate path"],
+    correct: 0,
+    explanation: "The port allows only one secure MAC address and uses shutdown violation mode. A violation puts the port into secure-shutdown (err-disabled) state."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "single",
+    question: "Refer to the output. What traffic is permitted by the ACL?",
+    snippet: "R1# show access-lists 110\nExtended IP access list 110\n    10 permit tcp 10.10.10.0 0.0.0.255 host 172.16.1.10 eq 443\n    20 deny ip any any",
+    options: ["Any IP traffic from 10.10.10.0/24 to 172.16.1.10", "HTTPS traffic from 10.10.10.0/24 to 172.16.1.10", "HTTPS traffic from any source to 172.16.1.10", "All traffic to TCP port 443"],
+    correct: 1,
+    explanation: "Sequence 10 permits TCP traffic from 10.10.10.0/24 to the specific host 172.16.1.10 when the destination port is 443 (HTTPS)."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "Refer to the output. Which data format is shown?",
+    snippet: "R1# show running-config | format json\n{\n  \"interfaces\": [\n    {\n      \"name\": \"GigabitEthernet1\",\n      \"enabled\": true\n    }\n  ]\n}",
+    options: ["XML", "JSON", "YAML", "NETCONF RPC"],
+    correct: 1,
+    explanation: "The curly braces, quoted keys, array brackets, and true Boolean value identify JSON."
+  }
+];
+
+questions.push(...commandAnalysisQuestions);

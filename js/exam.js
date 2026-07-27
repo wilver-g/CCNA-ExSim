@@ -51,7 +51,7 @@ const Exam = {
     startTimer() {
         if (this.timerInterval) clearInterval(this.timerInterval);
 
-        const timerDisplay = document.getElementById("timer");
+        const timerDisplay = document.getElementById("time");
 
         this.timerInterval = setInterval(() => {
             if (this.timeLeft <= 0) {
@@ -75,6 +75,7 @@ const Exam = {
                 ].filter(Boolean).join(":");
 
                 timerDisplay.innerText = formattedTime;
+                document.title = `${formattedTime} · CCNA Practice Exam`;
             }
         }, 1000);
     },
@@ -138,6 +139,8 @@ const Exam = {
 
     submitExam() {
         if (this.timerInterval) clearInterval(this.timerInterval);
+        this.timerInterval = null;
+        document.title = "CCNA Practice Exam Results";
 
         let results = {};
         if (typeof Analytics !== "undefined" && typeof Analytics.evaluateExam === "function") {
