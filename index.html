@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCNA 200-301 Practice Exam</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Main Exam Interface -->
+    <div id="quizContainer" class="container">
+        <header>
+            <h1>CCNA 200-301 Practice Exam</h1>
+
+            <div class="topbar">
+                <div id="timer">
+                    Time Remaining
+                    <span id="time">120:00</span>
+                </div>
+
+                <div>
+                    <div id="domainBadge" class="domain-badge">IP Connectivity</div>
+                    <div id="progressText">Question 1 of 20</div>
+                </div>
+            </div>
+
+            <div class="progress">
+                <div id="progressBar"></div>
+            </div>
+        </header>
+
+        <main class="exam">
+            <div id="questionContainer">
+                <h2 id="question"></h2>
+                
+                <!-- Terminal / CLI Snippets -->
+                <div id="codeBlock"></div>
+
+                <!-- Answer Options -->
+                <div id="answers"></div>
+            </div>
+
+            <div class="buttons">
+                <button id="prevBtn">Previous</button>
+                <button id="flagBtn" class="btn-flag">Flag for Review</button>
+                <button id="nextBtn">Next</button>
+            </div>
+        </main>
+
+        <section class="navigator">
+            <h3>Question Navigator</h3>
+            <div id="navButtons"></div>
+        </section>
+    </div>
+
+    <!-- Final Results Interface -->
+    <div id="resultScreen" class="hidden">
+        <h1>Exam Complete</h1>
+        <h2 id="finalScore"></h2>
+
+        <div class="results">
+            <h3>Performance by Domain</h3>
+            <ul>
+                <li>Network Fundamentals: <span id="nf">0%</span></li>
+                <li>Network Access: <span id="na">0%</span></li>
+                <li>IP Connectivity: <span id="ipc">0%</span></li>
+                <li>IP Services: <span id="ips">0%</span></li>
+                <li>Security Fundamentals: <span id="sec">0%</span></li>
+                <li>Automation & Programmability: <span id="auto">0%</span></li>
+            </ul>
+        </div>
+
+        <div id="feedback"></div>
+
+        <h2>Answer Review</h2>
+        <div id="review"></div>
+
+        <button onclick="location.reload()" style="margin-top: 25px;">Take Another Exam</button>
+    </div>
+
+    <!-- Application Modules -->
+    <script src="js/questions.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/exam.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

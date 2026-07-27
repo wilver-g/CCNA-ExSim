@@ -1,0 +1,430 @@
+/* ================================
+   CCNA Practice Exam Simulator
+   style.css
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #eef3f8;
+    color: #222;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
+    padding: 30px;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #005073;
+    margin-bottom: 20px;
+}
+
+/* Domain Tag Badge */
+.domain-badge {
+    display: inline-block;
+    background: #e1f0f7;
+    color: #005073;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#timer {
+    background: #005073;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#time {
+    display: block;
+    margin-top: 5px;
+    font-size: 24px;
+}
+
+#progressText {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.progress {
+    width: 100%;
+    height: 16px;
+    background: #d8d8d8;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background: #0d9be1;
+    transition: .3s;
+}
+
+.exam {
+    margin-top: 30px;
+}
+
+#question {
+    margin-bottom: 25px;
+    line-height: 1.5;
+    font-size: 18px;
+    color: #1e293b;
+}
+
+/* CLI Output & Code Snippets */
+pre, code {
+    background: #1e293b;
+    color: #38bdf8;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 14px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    display: block;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Fix: Answer Choices Styling & Visible Text Color */
+.answer {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 16px;
+    margin-bottom: 15px;
+    border: 2px solid #d5d5d5;
+    border-radius: 8px;
+    background: #ffffff !important;
+    color: #222222 !important; /* Explicit high-contrast text color */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.answer:hover {
+    border-color: #0d9be1;
+    background: #f0f9ff !important;
+    color: #005073 !important;
+}
+
+.answer.selected {
+    background: #d7f0ff !important;
+    border-color: #007acc !important;
+    color: #003853 !important;
+    font-weight: bold;
+}
+
+/* Navigation Buttons Container */
+.buttons {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Default Action Buttons */
+button {
+    background: #005073;
+    color: #ffffff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .2s;
+}
+
+button:hover {
+    background: #0077aa;
+}
+
+button:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+/* Secondary & Flag Button Styles */
+.btn-flag {
+    background: transparent;
+    border: 2px solid #f39c12;
+    color: #d35400;
+}
+
+.btn-flag:hover {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-flag.active {
+    background: #f39c12;
+    color: white;
+}
+
+.navigator {
+    margin-top: 40px;
+}
+
+.navigator h3 {
+    margin-bottom: 20px;
+}
+
+#navButtons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.navBtn {
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #d9d9d9;
+    font-weight: bold;
+    transition: .2s;
+    color: #333333 !important;
+}
+
+.navBtn.answered {
+    background: #27ae60;
+    color: #ffffff !important;
+}
+
+.navBtn.review {
+    background: #f39c12;
+    color: #ffffff !important;
+}
+
+/* Priority outline for current active question */
+.navBtn.current {
+    outline: 3px solid #005073;
+    outline-offset: 2px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Result Screen */
+#resultScreen {
+    max-width: 900px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
+}
+
+#resultScreen h1 {
+    color: #005073;
+    margin-bottom: 20px;
+}
+
+#finalScore {
+    margin-bottom: 30px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.results {
+    background: #f7f7f7;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.results ul {
+    list-style: none;
+}
+
+.results li {
+    padding: 8px 0;
+    font-size: 18px;
+}
+
+#feedback {
+    margin: 30px 0;
+    background: #eef9ff;
+    border-left: 5px solid #0d9be1;
+    padding: 20px;
+    line-height: 1.7;
+}
+
+.reviewCard {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.reviewCard.correct {
+    border-left: 8px solid #27ae60;
+}
+
+.reviewCard.wrong {
+    border-left: 8px solid #e74c3c;
+}
+
+.reviewQuestion {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.reviewAnswer {
+    margin-top: 8px;
+}
+
+.correctText {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.wrongText {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.explanation {
+    margin-top: 12px;
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+/* Responsive adjustments */
+@media(max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    #navButtons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media(max-width: 500px) {
+    #navButtons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    #question {
+        font-size: 18px;
+    }
+
+    .answer {
+        font-size: 15px;
+    }
+}
+
+/* Drag and Drop UI */
+.dragdrop-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.drag-column, .drop-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.draggable-card {
+    padding: 12px 16px;
+    background-color: #0056b3;
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: grab;
+    font-weight: 600;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.draggable-card.placed {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.draggable-card.in-slot {
+    background-color: #28a745;
+    margin: 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.dropzone {
+    border: 2px dashed #ccc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+.zone-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.drop-slot {
+    min-height: 45px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
