@@ -781,7 +781,7 @@ const dragDropQuestions = [
     {
         domain: "IP Connectivity",
         type: "multiple",
-        question: "Which static route configuration creates a valid floating static route with an administrative distance of 250?",
+        question: "Which static route configuration creates a valid default floating static route with an administrative distance of 250?",
         options: [
             "ip route 0.0.0.0 0.0.0.0 192.168.1.1 250",
             "ip route 0.0.0.0 0.0.0.0 192.168.1.1",
