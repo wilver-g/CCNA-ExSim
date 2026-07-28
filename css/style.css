@@ -556,6 +556,17 @@ body.theme-dark .navBtn {
     color: #f4f8fb !important;
     border-color: #587084;
 }
+
+body.theme-dark .navBtn.answered {
+    background: #27ae60 !important;
+    color: #ffffff !important;
+}
+
+body.theme-dark .navBtn.review {
+    background: #f39c12 !important;
+    color: #ffffff !important;
+}
+
 .review-card .explanation-block {
     margin-top: 10px;
     padding: 14px;
