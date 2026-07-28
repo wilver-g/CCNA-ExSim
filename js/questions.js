@@ -432,6 +432,49 @@ let questions = [
   {
     domain: "IP Services",
     type: "single",
+    question: "Which QoS marking mechanism uses 3 bits in an 802.1Q header to prioritize Ethernet frames on a trunk link?",
+    options: ["DSCP", "CoS", "TTL", "MPLS EXP"],
+    correct: 1,
+    explanation: "Class of Service (CoS) uses the 802.1Q priority field (3 bits) to mark Ethernet frames at Layer 2 for QoS handling across trunk links."
+  },
+  {
+    domain: "IP Services",
+    type: "multiple",
+    question: "Which two QoS mechanisms are used to control traffic rates on Cisco routers? (Choose two.)",
+    options: [
+      "Traffic shaping",
+      "IP fragmentation",
+      "Traffic policing",
+      "ACL logging",
+      "OSPF cost tuning"
+    ],
+    correct: [0, 2],
+    explanation: "Traffic shaping buffers and delays packets to match a configured rate, while policing drops or marks packets that exceed a configured rate."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "Which DSCP value is typically used for Expedited Forwarding (EF) traffic?",
+    options: ["10", "32", "46", "56"],
+    correct: 2,
+    explanation: "The Expedited Forwarding (EF) PHB commonly uses DSCP value 46 to identify traffic that requires low loss and low latency, such as voice."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "What QoS function does the 'policy-map' command configure on a Cisco router?",
+    options: [
+      "Apply defined class-map actions to traffic",
+      "Create VLANs based on QoS class",
+      "Disable QoS marking on an interface",
+      "Encrypt QoS information inside packets"
+    ],
+    correct: 0,
+    explanation: "A policy-map defines actions such as policing, shaping, marking, or queuing for traffic matched by class-maps."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
     question: "In First Hop Redundancy Protocols (FHRP), which virtual IP address concept is provided by HSRP?",
     options: [
       "A single virtual gateway IP shared between primary and standby routers",
