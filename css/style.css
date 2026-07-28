@@ -515,9 +515,19 @@ body.theme-dark .review-card {
 body.theme-dark header h1,
 body.theme-dark #question,
 body.theme-dark .navigator h3,
-body.theme-dark .domain-badge,
 body.theme-dark .zone-label {
     color: #d7efff;
+}
+
+body.theme-dark .domain-badge {
+    background: rgba(27, 61, 88, 0.95);
+    color: #cce8ff;
+    border: 1px solid #63b5ff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+body.theme-dark #progressText {
+    color: #eef6ff;
 }
 
 body.theme-dark .utility-bar,
@@ -546,7 +556,21 @@ body.theme-dark .navBtn {
     color: #f4f8fb !important;
     border-color: #587084;
 }
+.review-card .explanation-block {
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #eef3ff;
+    color: #1c1c1c;
+    border-left: 4px solid #0056b3;
+    line-height: 1.6;
+}
 
+body.theme-dark .review-card .explanation-block {
+    background: #17212a;
+    color: #e8f2ff;
+    border-color: #5bb0ff;
+}
 body.theme-dark .answer:hover,
 body.theme-dark .answer.selected {
     background: #164c69 !important;

@@ -370,7 +370,7 @@ const UI = {
                     <p style="font-weight:bold; margin-bottom: 8px;">Q${idx + 1}: ${this.escapeHTML(q.question)}</p>
                     <p style="margin: 4px 0; color: ${isCorrect ? '#28a745' : '#dc3545'};"><strong>Your Answer:</strong> ${userAnsDisplay}</p>
                     ${!isCorrect && q.options ? `<p style="margin: 4px 0; color: #28a745;"><strong>Correct Answer:</strong> ${Analytics.normalizeAnswer(rawCorrect).map(i => `${String.fromCharCode(65 + i)}. ${q.options[i]}`).join(", ")}</p>` : ''}
-                    ${q.explanation ? `<div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 4px; font-size: 0.9rem;"><strong>Explanation:</strong> ${this.escapeHTML(q.explanation)}</div>` : ''}
+                    ${q.explanation ? `<div class="explanation-block"><strong>Explanation:</strong> ${this.escapeHTML(q.explanation)}</div>` : ''}
                 </div>
             `;
         });

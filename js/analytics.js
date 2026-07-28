@@ -7,7 +7,7 @@ const Analytics = {
         const domains = {};
 
         questionsList.forEach((q, index) => {
-            const domainName = q.domain || "General";
+            const domainName = Analytics.normalizeDomainName(q.domain || "General");
             if (!domains[domainName]) {
                 domains[domainName] = { correct: 0, total: 0, percentage: 0 };
             }
@@ -56,6 +56,17 @@ const Analytics = {
         if (ans === undefined || ans === null) return [];
         if (Array.isArray(ans)) return [...ans].sort();
         return [ans];
+    },
+
+    normalizeDomainName(domainName) {
+        const normalized = String(domainName).trim();
+        switch (normalized.toLowerCase()) {
+            case "automation and programmability":
+            case "automation & programmability":
+                return "Automation & Programmability";
+            default:
+                return normalized;
+        }
     },
 
     calculate() {
