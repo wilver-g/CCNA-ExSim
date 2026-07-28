@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#005073"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill:#f5f8fb; }
+    .device { fill:#ffffff; stroke:#005073; stroke-width:2; rx:10; }
+    .cloud { fill:#dbe9f2; stroke:#005073; stroke-width:2; }
+    .text { font-family: Arial, Helvetica, sans-serif; font-size:14px; fill:#0f2b44; }
+    .title { font-size:16px; font-weight:bold; }
+    .label { font-size:13px; fill:#003853; }
+    .note { font-size:12px; fill:#005073; }
+    .line { stroke:#005073; stroke-width:2; marker-end:url(#arrow); }
+  </style>
+  <rect width="700" height="280" fill="#eef5fb" rx="18" />
+  <g>
+    <rect x="280" y="90" width="140" height="100" class="device" />
+    <text x="350" y="120" class="text title" text-anchor="middle">Branch Router</text>
+    <text x="350" y="140" class="text" text-anchor="middle">Gi0/1 LAN</text>
+    <text x="350" y="160" class="text" text-anchor="middle">Gi0/0 ISP</text>
+  </g>
+  <g>
+    <ellipse cx="120" cy="140" rx="90" ry="50" class="cloud" />
+    <text x="120" y="130" class="text title" text-anchor="middle">LAN</text>
+    <text x="120" y="150" class="text" text-anchor="middle">10.0.0.0/24</text>
+  </g>
+  <g>
+    <ellipse cx="580" cy="140" rx="95" ry="55" class="cloud" />
+    <text x="580" y="130" class="text title" text-anchor="middle">ISP</text>
+    <text x="580" y="150" class="text" text-anchor="middle">203.0.113.0/24</text>
+  </g>
+  <line x1="210" y1="140" x2="280" y2="140" class="line" />
+  <line x1="420" y1="140" x2="500" y2="140" class="line" />
+  <text x="350" y="190" class="note" text-anchor="middle">Apply QoS shaping on the ISP-facing interface</text>
+  <rect x="320" y="205" width="160" height="50" rx="8" fill="#dbe9f2" stroke="#005073" stroke-width="1" />
+  <text x="400" y="235" class="text" text-anchor="middle">service-policy output SHAPE-10MB</text>
+</svg>

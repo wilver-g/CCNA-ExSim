@@ -1625,6 +1625,33 @@ const diagramQuestions = [
     options: ["Type 1", "Type 2", "Type 3", "Type 5"],
     correct: 2,
     explanation: "An ABR like R2 summarizes and advertises inter-area routes into another OSPF area as Type 3 LSAs."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "Refer to the topology. Which command is appropriate to apply the shaping policy to outbound traffic on the ISP-facing interface?",
+    diagram: { src: "assets/topology-qos-policy.svg", alt: "Branch Router connects a LAN 10.0.0.0/24 to ISP 203.0.113.0/24 with a note to apply QoS shaping on the ISP-facing interface.", caption: "QoS shaping policy scenario" },
+    options: ["service-policy output SHAPE-10MB", "service-policy input SHAPE-10MB", "ip nat outside", "ip access-group 101 out"],
+    correct: 0,
+    explanation: "To shape outbound traffic on the ISP-facing interface, use an outbound service-policy command such as service-policy output SHAPE-10MB."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "Refer to the topology. Why will untagged traffic from SW1 be treated differently on SW2?",
+    diagram: { src: "assets/topology-native-vlan-mismatch.svg", alt: "SW1 native VLAN 10 connects to SW2 native VLAN 1 over an 802.1Q trunk.", caption: "Native VLAN mismatch scenario" },
+    options: ["SW1 and SW2 have different native VLANs, causing untagged frames to be assigned to different VLANs", "The trunk will automatically negotiate VLAN 10 despite the native VLAN mismatch", "VLAN 20 traffic will be tagged as VLAN 1 on SW2", "The native VLAN only affects management traffic, not user traffic"],
+    correct: 0,
+    explanation: "When native VLANs differ across a trunk, untagged frames from one switch are classified into a different VLAN by the other switch, causing communication problems."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "Refer to the topology. Which router configuration is required to support VLAN 20 traffic from the access switch?",
+    diagram: { src: "assets/topology-router-subinterfaces.svg", alt: "Access Switch sends VLAN 10 and VLAN 20 over a trunk to a router using subinterfaces Gi0/0.10 and Gi0/0.20.", caption: "Router subinterface VLAN routing scenario" },
+    options: ["interface GigabitEthernet0/0.20\n encapsulation dot1Q 20\n ip address 10.0.20.1 255.255.255.0", "interface GigabitEthernet0/0\n ip address 10.0.20.1 255.255.255.0", "interface GigabitEthernet0/0.20\n no switchport\n ip address 10.0.0.1 255.255.255.0", "interface GigabitEthernet0/0\n encapsulation dot1Q 20\n ip address 10.0.20.1 255.255.255.0"],
+    correct: 0,
+    explanation: "Router-on-a-stick uses subinterfaces with encapsulation dot1Q and a specific VLAN tag, such as Gi0/0.20 for VLAN 20."
   }
 ];
 
