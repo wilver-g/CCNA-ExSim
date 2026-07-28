@@ -95,10 +95,15 @@ function isValidQuestion(question) {
 function getSavedQuestionBank() {
     try {
         const saved = JSON.parse(localStorage.getItem(QUESTION_BANK_STORAGE_KEY));
-        return Array.isArray(saved) && saved.length > 0 && saved.every(isValidQuestion) ? saved : null;
+        if (Array.isArray(saved) && saved.length > 0 && saved.every(isValidQuestion)) {
+            const { merged } = mergeQuestionBanks(saved, DEFAULT_QUESTION_BANK);
+            return merged;
+        }
     } catch {
-        return null;
+        // Fall back to the built-in bank if the saved copy is missing or invalid.
     }
+
+    return structuredClone(DEFAULT_QUESTION_BANK);
 }
 
 function saveQuestionBank(questionBank) {

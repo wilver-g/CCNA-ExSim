@@ -559,6 +559,203 @@ let questions = [
     options: ["Data Plane", "Management Plane", "Control Plane", "Forwarding Plane"],
     correct: 1,
     explanation: "The Management plane provides administrative controls, GUI/API interfaces, and provisioning tasks across infrastructure elements."
+  },
+
+  // --- Scenario-Based Additions ---
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "A user in the 192.168.20.0/24 subnet can reach the printer in the same office but cannot access the internet. The workstation has IP 192.168.20.50/24, a subnet mask of 255.255.255.0, a default gateway of 192.168.20.1, and DNS 8.8.8.8. Which issue is most likely?",
+    options: [
+      "The workstation is using the wrong subnet mask",
+      "The default gateway address is incorrect or unreachable",
+      "The DNS server is not reachable",
+      "The NIC is operating at half duplex"
+    ],
+    answer: [1],
+    explanation: "If the user can reach local resources but not remote networks, the default gateway is the most likely issue because it is required for traffic leaving the local subnet."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "A PC connected to a Cisco switch cannot pass traffic even though the cable is good. The switchport shows an err-disabled state after a security violation. What is the most likely cause?",
+    options: [
+      "The port is configured as a trunk with no VLANs allowed",
+      "The port received a BPDU from another switch",
+      "The port was assigned to the wrong VLAN",
+      "The port is in dynamic auto mode"
+    ],
+    answer: [1],
+    explanation: "BPDU Guard can place an access port into err-disabled state when it receives a Spanning Tree BPDU, which is a common security violation scenario."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "A router has both an OSPF route and a static route to 10.0.0.0/8. The static route points to 192.168.1.1 and the OSPF route has a default administrative distance of 110. Which route will be used by default?",
+    options: [
+      "The OSPF route because it has a lower administrative distance than the static route",
+      "The static route because it has a lower administrative distance than the OSPF route",
+      "Both routes will be load-shared equally",
+      "Neither route will be installed because the prefixes overlap"
+    ],
+    answer: [1],
+    explanation: "Static routes have a default administrative distance of 1, which is lower than OSPF's default AD of 110, so the static route is preferred."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "A branch office has a DHCP server on a different subnet, and clients cannot obtain leases. The router interface toward the clients has no DHCP relay configured. Which command should be added to fix the issue?",
+    options: [
+      "ip dhcp pool BRANCH",
+      "ip helper-address 192.168.10.5",
+      "ip route 0.0.0.0 0.0.0.0 192.168.10.1",
+      "service dhcp"
+    ],
+    answer: [1],
+    explanation: "The ip helper-address command forwards DHCP broadcasts from clients to a DHCP server located on another subnet."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "single",
+    question: "An administrator notices that a switchport connected to a user laptop is repeatedly shutting down after a new device is plugged in. Which security feature is most likely configured?",
+    options: [
+      "PortFast",
+      "DHCP Snooping",
+      "Port Security",
+      "Storm Control"
+    ],
+    answer: [2],
+    explanation: "Port Security can disable a switchport when unauthorized MAC addresses or too many addresses are detected, causing the interface to enter err-disabled state."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "A network engineer wants to automate repetitive configuration changes across several Cisco devices using a human-readable playbook. Which tool is the best fit?",
+    options: [
+      "Ansible",
+      "SNMP",
+      "Telnet",
+      "RADIUS"
+    ],
+    answer: [0],
+    explanation: "Ansible uses YAML-based playbooks to automate device configuration and can manage Cisco devices over SSH."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "A workstation cannot reach other hosts on the same subnet, but it can still see its own IP on the local link. Which issue is most likely?",
+    options: [
+      "The host is using a duplicate IP address",
+      "The host is configured with the wrong default gateway",
+      "The host has a misconfigured DNS server",
+      "The host is using IPv6 only"
+    ],
+    answer: [0],
+    explanation: "A duplicate IP address can prevent communication on the local subnet even though the interface still appears to be configured."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "A switchport connected to a printer shows no traffic after a recent change. The port is in access mode but the VLAN assignment is missing. Which command is most likely needed?",
+    options: [
+      "switchport mode trunk",
+      "switchport access vlan 1",
+      "spanning-tree portfast",
+      "ip default-gateway"
+    ],
+    answer: [1],
+    explanation: "If an access port has no assigned VLAN or is using the default VLAN incorrectly, assigning it to a valid access VLAN restores expected behavior."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "A router can ping a directly connected neighbor but cannot reach a remote subnet. The route table shows no entry for the remote network. Which troubleshooting step is most appropriate?",
+    options: [
+      "Check for a missing routing protocol or static route",
+      "Disable DNS lookup",
+      "Reboot the switch",
+      "Increase the MTU"
+    ],
+    answer: [0],
+    explanation: "If a remote subnet is unreachable and no route exists, the issue is likely a missing or misconfigured routing entry."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Two OSPF routers are not forming an adjacency even though they are directly connected. Which common mismatch should be checked first?",
+    options: [
+      "DNS server address",
+      "Hello and dead timers",
+      "MAC address table",
+      "VLAN trunking state"
+    ],
+    answer: [1],
+    explanation: "OSPF neighbors must agree on key parameters such as area ID, subnet mask, and hello/dead timers to form adjacency."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "Clients on one subnet cannot receive an IP address from a DHCP server on another subnet. Which feature should be enabled on the router?",
+    options: [
+      "IP helper-address",
+      "NAT overload",
+      "PortFast",
+      "STP root guard"
+    ],
+    answer: [0],
+    explanation: "DHCP relay, configured with ip helper-address, forwards local broadcasts to the DHCP server on a remote subnet."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "A network admin sees that web traffic is failing from inside the network, but outbound pings to the internet work. Which issue is most likely?",
+    options: [
+      "Misconfigured DNS resolution",
+      "A missing default route",
+      "A trunking problem",
+      "A duplex mismatch"
+    ],
+    answer: [0],
+    explanation: "If basic connectivity works but name-based access fails, DNS resolution is a likely cause."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "single",
+    question: "A user reports they can no longer SSH to a router even though they previously could. The router is reachable by ping, but port 22 is blocked. Which cause is most likely?",
+    options: [
+      "An ACL is denying TCP 22",
+      "The router is using DHCP",
+      "The switch is in spanning-tree blocking",
+      "The gateway is missing"
+    ],
+    answer: [0],
+    explanation: "SSH uses TCP port 22; an ACL blocking that port would prevent SSH access even if the device is otherwise reachable."
+  },
+  {
+    domain: "Security Fundamentals",
+    type: "single",
+    question: "An access switch has a user device that keeps getting disconnected after a new MAC address appears on the port. Which feature is likely causing the disconnect?",
+    options: [
+      "Port Security",
+      "Spanning Tree",
+      "VTP",
+      "NTP"
+    ],
+    answer: [0],
+    explanation: "Port Security can shut down or restrict a port when unauthorized MAC addresses are detected."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "An engineer wants to collect real-time device status from multiple routers without manually logging in to each one. Which protocol is most appropriate?",
+    options: [
+      "SNMP",
+      "ARP",
+      "ICMP",
+      "STP"
+    ],
+    answer: [0],
+    explanation: "SNMP is commonly used for monitoring and collecting device statistics from network infrastructure."
   }
   
 ];
