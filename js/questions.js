@@ -1598,6 +1598,33 @@ const diagramQuestions = [
     options: ["Inbound on R1's interface closest to the users", "Outbound on R1's interface closest to the users", "Inbound on R1's interface closest to the servers", "On the server NICs only"],
     correct: 0,
     explanation: "Extended ACLs are generally placed as close to the source as possible to stop unwanted traffic before it crosses the network."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Refer to the topology. If R3 stops advertising the 10.10.10.0/24 network, which route will R1 still use for traffic to 10.10.10.25?",
+    diagram: { src: "assets/topology-longest-prefix.svg", alt: "R1 has a route through R2 to 10.10.0.0 slash 16 and through R3 to 10.10.10.0 slash 24.", caption: "Routing-table longest-prefix-match scenario" },
+    options: ["The /16 route through R2", "The network becomes unreachable", "R1 will use a static route to a different subnet", "Traffic will be load-balanced between R2 and R3"],
+    correct: 0,
+    explanation: "If the /24 route is withdrawn, the router falls back to the remaining less-specific /16 route through R2 for destinations inside that larger network."
+  },
+  {
+    domain: "Network Access",
+    type: "single",
+    question: "Refer to the topology. SW1 allows VLANs 10 and 20 on the trunk, while SW2 allows VLANs 10, 20, and 30. What is true for VLAN 20 traffic between the switches?",
+    diagram: { src: "assets/topology-vlan-trunk.svg", alt: "SW1 and SW2 connect over an 802.1Q trunk. VLAN 10 and VLAN 20 exist on both switches.", caption: "VLAN trunking scenario" },
+    options: ["VLAN 20 traffic will pass normally because it is allowed on both ends", "VLAN 20 traffic will be blocked because SW2 allows VLAN 30", "The trunk will fall back to access mode", "VLAN 20 traffic will be tagged as VLAN 30 on SW2"],
+    correct: 0,
+    explanation: "Traffic for VLAN 20 is permitted because both sides of the trunk include VLAN 20 in their allowed VLAN lists; extra allowed VLANs on one side do not block matching VLANs."
+  },
+  {
+    domain: "IP Connectivity",
+    type: "single",
+    question: "Refer to the OSPF topology. Which LSA type would R2 originate into Area 0 to advertise networks from Area 1?",
+    diagram: { src: "assets/topology-ospf.svg", alt: "R1 in OSPF Area 1 connects to R2, which connects into Area 0 to R3.", caption: "Multi-area OSPF scenario" },
+    options: ["Type 1", "Type 2", "Type 3", "Type 5"],
+    correct: 2,
+    explanation: "An ABR like R2 summarizes and advertises inter-area routes into another OSPF area as Type 3 LSAs."
   }
 ];
 
