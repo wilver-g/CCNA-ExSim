@@ -1550,6 +1550,63 @@ const dragDropQuestions = [
     correct: [0, 1, 2, 3],
     explanation: "GET retrieves resources, POST creates resources, PUT replaces or updates resources, and DELETE removes resources."
   }
+  ,
+  {
+    domain: "Wireless Networks",
+    type: "single",
+    question: "Which three 2.4 GHz channels are commonly used in North America because they do not overlap?",
+    options: ["1, 6, 11", "1, 3, 5", "6, 7, 8", "11, 12, 13"],
+    correct: 0,
+    explanation: "Channels 1, 6, and 11 are spaced to avoid overlap in 20 MHz channel deployments on the 2.4 GHz band."
+  },
+  {
+    domain: "Wireless Networks",
+    type: "single",
+    question: "Which IEEE 802.11 amendment introduced MIMO and OFDM and commonly operates in both 2.4 GHz and 5 GHz (Wi-Fi 4)?",
+    options: ["802.11n", "802.11ac", "802.11g", "802.11b"],
+    correct: 0,
+    explanation: "802.11n (Wi‑Fi 4) introduced MIMO and OFDM improvements and can operate in both 2.4 GHz and 5 GHz bands."
+  },
+  {
+    domain: "Wireless Networks",
+    type: "single",
+    question: "Which deployment model centralizes wireless management on a controller and uses lightweight APs that rely on the controller for configuration?",
+    options: ["Standalone APs", "Autonomous APs", "Controller-based (CAPWAP) lightweight APs", "Mesh APs"],
+    correct: 2,
+    explanation: "Controller-based deployments use CAPWAP (or similar) so lightweight APs receive configuration and control from a central wireless controller."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "Which protocol uses XML over SSH, RPCs, and YANG data models to configure network devices programmatically?",
+    options: ["RESTCONF", "NETCONF", "SNMPv2c", "TFTP"],
+    correct: 1,
+    explanation: "NETCONF is an XML-based protocol that uses RPCs and commonly relies on YANG data models for structured device configuration."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "Which data modeling language defines schema for network configuration and telemetry used by NETCONF/RESTCONF?",
+    options: ["YANG", "MIB", "SMI", "ASN.1"],
+    correct: 0,
+    explanation: "YANG defines machine-readable models for device configuration and state data, and is widely used with NETCONF and RESTCONF."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "What does it mean for an automation playbook or task to be idempotent?",
+    options: ["It always makes changes every run", "It produces the same end state when run multiple times", "It requires manual intervention", "It only runs once per host"],
+    correct: 1,
+    explanation: "Idempotent tasks leave the system in the same desired state no matter how many times they are executed, preventing unintended side effects."
+  },
+  {
+    domain: "Automation & Programmability",
+    type: "single",
+    question: "Which telemetry approach pushes structured data from devices to collectors in near real-time rather than relying on periodic polling?",
+    options: ["SNMP polling", "Syslog", "Model-driven telemetry (gNMI/gRPC) push", "NetFlow export"],
+    correct: 2,
+    explanation: "Model-driven telemetry (often using gNMI/gRPC) streams structured data from devices to collectors proactively, enabling higher-frequency, lower-latency monitoring."
+  }
 ];
 questions.push(...dragDropQuestions);
 
