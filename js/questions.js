@@ -800,7 +800,84 @@ let questions = [
     answer: [0],
     explanation: "SNMP is commonly used for monitoring and collecting device statistics from network infrastructure."
   }
-  
+  ,
+  // --- Rote memorization / quick facts for CCNA cram ---
+  {
+    domain: "Network Fundamentals",
+    type: "multiple",
+    question: "Which three fields are present in an IPv4 header? (Choose three)",
+    options: [
+      "Source IP address",
+      "Destination MAC address",
+      "Time To Live (TTL)",
+      "Source TCP port",
+      "Header checksum",
+      "EtherType"
+    ],
+    correct: [0, 2, 4],
+    explanation: "IPv4 headers include Source and Destination IP addresses, TTL, Header checksum, among other fields. MAC and EtherType are Layer 2 fields; TCP ports are in the transport header."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "Which TCP flag is used to begin a TCP three-way handshake?",
+    options: ["SYN", "ACK", "FIN", "RST"],
+    correct: 0,
+    explanation: "The SYN flag initiates a TCP connection. The typical handshake is SYN, SYN-ACK, ACK."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "Which TCP flag is used to acknowledge received segments?",
+    options: ["SYN", "ACK", "FIN", "PSH"],
+    correct: 1,
+    explanation: "The ACK flag indicates that the Acknowledgment field is valid and acknowledges receipt of data."
+  },
+  {
+    domain: "IP Services",
+    type: "single",
+    question: "Which well-known port is used by HTTPS (secure web traffic)?",
+    options: ["80", "443", "22", "53"],
+    correct: 1,
+    explanation: "HTTPS uses TCP port 443. HTTP uses 80, SSH 22, and DNS commonly uses 53."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "What protocol number is assigned to TCP in the IPv4 protocol field?",
+    options: ["1", "6", "17", "89"],
+    correct: 1,
+    explanation: "In the IPv4 Protocol field, ICMP = 1, TCP = 6, UDP = 17."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "multiple",
+    question: "Which three fields are part of an Ethernet II frame? (Choose three)",
+    options: [
+      "Destination MAC address",
+      "Source MAC address",
+      "EtherType",
+      "IP header",
+      "Frame Check Sequence (FCS)",
+      "Sequence number"
+    ],
+    correct: [0, 1, 2],
+    explanation: "Ethernet II frames include Destination MAC, Source MAC, EtherType, and FCS. IP headers and TCP sequence numbers are higher-layer fields."
+  },
+  {
+    domain: "Network Fundamentals",
+    type: "single",
+    question: "Which statement about MTU and IP fragmentation is true?",
+    options: [
+      "MTU defines the maximum IP packet size that can be transmitted on a link",
+      "Packets larger than the MTU are always dropped and never fragmented",
+      "IP fragmentation can occur when a packet exceeds the MTU unless the DF (Don't Fragment) bit is set",
+      "MTU only applies to IPv6 and not IPv4"
+    ],
+    correct: 2,
+    explanation: "IP fragmentation occurs when a packet is larger than the link MTU unless the DF bit prevents fragmentation. MTU applies to both IPv4 and IPv6 (with IPv6 fragmentation handled differently)."
+  }
+
 ];
 
 const dragDropQuestions = [
